@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>Document</title>
+  </head>
+  <body>
+    <input id="inp" name="" type="text" value=""/>
+    <button id="bt">fetch</button>
+  </body>
+
+  <script>
+   var bt = document.getElementById('bt');
+   var inp = document.getElementById('inp');
+
+   bt.addEventListener('click', () => {
+     fetch(inp.value)
+     .then(res => res.text())
+     .then(res => { inp.value = res; });
+   });
+  </script>
+</html>
