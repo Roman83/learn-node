@@ -45,7 +45,7 @@ const server = http.createServer((req, res) => {
       }
     });
     break;
-  case '/week4/': 
+  case '/result4/': 
     res.statusCode = 200;
     setHeaders(res, {
       'Content-Type': 'application/json',
