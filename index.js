@@ -45,6 +45,24 @@ const server = http.createServer((req, res) => {
       }
     });
     break;
+  case '/week4/': 
+    res.statusCode = 200;
+    setHeaders(res, {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Methods': 'GET,POST,PUT,DELETE,OPTIONS',
+      'Access-Control-Allow-Headers': 'x-test,Content-Type,Accept,Access-Control-Allow-Headers',
+    });
+    console.log(req.body);
+    let body = '';
+    req.on('data', data => body += data.toString());
+    req.on('end', () => {
+      res.end(JSON.stringify({
+        message: 'Roman83',
+        'x-result': req.headers['x-result'],
+        'x-body': body,
+      }));
+    });
+    break;
   default:
     fs.readFile('index.html', (err, result) => {
       if (err) {
