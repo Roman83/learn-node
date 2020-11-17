@@ -58,7 +58,7 @@ const server = http.createServer((req, res) => {
     req.on('end', () => {
       res.end(JSON.stringify({
         message: 'Roman83',
-        'x-result': req.headers['x-result'],
+        'x-result': req.headers['x-test'],
         'x-body': body,
       }));
     });
