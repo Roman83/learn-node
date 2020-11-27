@@ -32,6 +32,7 @@ export default function appConstructor(express, bodyParser, createReadStream, cr
       login,
       password,
     });
+    res.send('Ok');
   });
 
   app.get('/code/', (req, res) => {
