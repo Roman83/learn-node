@@ -1,3 +1,5 @@
+import MongoClient from 'mongodb';
+
 function getFromUrl(url, res, http) {
   const req = http.request(url, (result) => {
     let data = '';
@@ -19,6 +21,17 @@ export default function appConstructor(express, bodyParser, createReadStream, cr
 
   app.get('/login/', (req, res) => {
     res.send('Roman83');
+  });
+
+  app.post('/insert/', async (res, req) => {
+    const { URL, login, password } =  req.body;
+    const mongo = new MongoClient(URL);
+    const conn = await mongo.connect();
+    const db = conn.db('mongodemo');
+    const result = await db.collection('users').insertOne({
+      login,
+      password,
+    });
   });
 
   app.get('/code/', (req, res) => {
