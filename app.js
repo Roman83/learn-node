@@ -23,16 +23,20 @@ export default function appConstructor(express, bodyParser, createReadStream, cr
     res.send('Roman83');
   });
 
-  app.post('/insert/', async (res, req) => {
+  app.post('/insert/', (req, res) => {
     const { URL, login, password } =  req.body;
-    const mongo = new MongoClient(URL);
-    const conn = await mongo.connect();
-    const db = conn.db('mongodemo');
-    const result = await db.collection('users').insertOne({
-      login,
-      password,
+    MongoClient.connect(URL, async (err, db) => {
+      if (err) {
+        res.send(err);
+      }
+
+      const result = await db.db().collection('users').insertOne({
+        login,
+        password,
+      });
+      res.send('Ok');
+      db.close();
     });
-    res.send('Ok');
   });
 
   app.get('/code/', (req, res) => {
