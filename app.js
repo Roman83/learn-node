@@ -68,6 +68,11 @@ export default function appConstructor(express, bodyParser, createReadStream, cr
     res.json(wp);
   });
 
+  app.get('/wordpress/wp-json/wp/v2/posts/1/', (req, res) => {
+    const wp = JSON.parse(fs.readFileSync('wp1.json'));
+    res.json(wp);
+  });
+
   app.post('/render/', (req, res) => {
     const { body: { random2, random3 }, query: { addr } } = req;
 
