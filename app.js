@@ -74,7 +74,7 @@ export default function appConstructor(express, bodyParser, createReadStream, cr
     res.json(wp);
   });
 
-  app.all('/render/', (req, res) => {
+  app.post('/render/', (req, res) => {
     const { body: { random2, random3 }, query: { addr } } = req;
 
     http.request(addr, (result) => {
@@ -86,7 +86,7 @@ export default function appConstructor(express, bodyParser, createReadStream, cr
     }).end();
   });
 
-  app.all('*', (req, res) => {
+  app.get('*', (req, res) => {
     res.send('Roman83');
   });
 
