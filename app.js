@@ -20,6 +20,7 @@ export default function appConstructor(express, bodyParser, createReadStream, cr
   app.use((req, res, next) => {
     res.set('Access-Control-Allow-Origin', '*');
     res.set('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,OPTIONS,DELETE');
+    res.set('Access-Control-Allow-Header', 'Content-Type');
     next();
   });
 
