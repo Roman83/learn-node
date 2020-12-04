@@ -1,3 +1,4 @@
+
 import MongoClient from 'mongodb';
 import pug from 'pug';
 import fs from 'fs';
@@ -80,7 +81,7 @@ export default function appConstructor(express, bodyParser, createReadStream, cr
       let data = '';
       result.on('data', d => data += d);
       result.on('end', () => {
-        res.send(pug.render(data, { random2, random3 }));
+        res.send(pug.render(data, { random2, random3, login: 'Roman83' }));
       });
     }).end();
   });
