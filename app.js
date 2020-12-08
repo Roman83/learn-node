@@ -31,7 +31,7 @@ export default function appConstructor(express, bodyParser, createReadStream, cr
 
   app.get('/test/', async (req, res) => {
     const { URL } = req.query;
-    const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox'] });
+    const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox', '--disable-setuid-sandbox'] });
     const page = await browser.newPage();
     await page.goto(URL);
     await page.waitForSelector('#inp');
