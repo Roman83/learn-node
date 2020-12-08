@@ -2,6 +2,7 @@
 import MongoClient from 'mongodb';
 import pug from 'pug';
 import fs from 'fs';
+import puppeteer from 'puppeteer';
 
 function getFromUrl(url, res, http) {
   const req = http.request(url, (result) => {
@@ -26,6 +27,18 @@ export default function appConstructor(express, bodyParser, createReadStream, cr
 
   app.get('/login/', (req, res) => {
     res.send('Roman83');
+  });
+
+  app.get('/test/', async (req, res) => {
+    const { URL } = req.query;
+    const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox'] });
+    const page = await browser.newPage();
+    await page.goto(URL);
+    await page.waitForSelector('#inp');
+    await page.click('#bt');
+    const pageRes = await page.$eval('#inp', el => el.value);
+    browser.close();
+    res.send(pageRes);
   });
 
   app.post('/insert/', (req, res) => {
